@@ -5,6 +5,7 @@ import os, time, json
 from datetime import datetime
 import threading
 from openai import OpenAI
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "afsjlkajfckjakljcjalksfjlasfafwerc"
@@ -57,7 +58,9 @@ def login_required(f):
     return decorated_function
 
 def get_openai_client():
+    load_dotenv()
     api_key = os.environ.get('OPENAI_API_KEY', 'FALLBACK OPEN AI KEY HERE')
+    print (api_key)
     return OpenAI(api_key=api_key)
 
 def generate_video_background(job_id, prompt, size, duration, user_id):
