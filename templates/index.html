@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M16 8L22 13L16 18L10 13L16 8Z" fill="white"/>
+                        <path d="M16 14L22 19L16 24L10 19L16 14Z" fill="white" opacity="0.6"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop offset="0%" style="stop-color:#667eea"/>
+                                <stop offset="100%" style="stop-color:#764ba2"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <h1>AI Video Generator</h1>
+                </div>
+                <div class="user-menu">
+                    <span class="username">👤 {{ username }}</span>
+                    <a href="/logout" class="logout-btn">Logout</a>
+                </div>
+            </div>
+            <p class="subtitle">Create stunning videos with OpenAI Sora</p>
+        </header>
+        <main>
+            <div class="generator-section">
+                <div class="card">
+                    <h2>Generate Video</h2>
+                    <form id="generateForm">
+                        <div class="form-group">
+                            <label for="prompt">Video Prompt</label>
+                            <textarea id="prompt" rows="4" placeholder="Describe your video..." required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="size">Size</label>
+                                <select id="size">
+                                    <option value="1280x720" selected>1280x720 (HD)</option>
+                                    <option value="1920x1080">1920x1080 (Full HD)</option>
+                                    <option value="720x1280">720x1280 (Portrait)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="duration">Duration</label>
+                                <select id="duration">
+                                    <option value="4">4 seconds</option>
+                                    <option value="8" selected>8 seconds</option>
+                                    <option value="12">12 seconds</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="generateBtn">Generate Video</button>
+                    </form>
+                </div>
+                <div id="progressSection" class="card" style="display: none;">
+                    <h3>Progress</h3>
+                    <div class="progress-info">
+                        <div class="status-badge" id="statusBadge">Queued</div>
+                        <div class="progress-percent" id="progressPercent">0%</div>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                    <p class="progress-text" id="progressText">Initializing...</p>
+                </div>
+                <div id="resultSection" class="card" style="display: none;">
+                    <h3>Generated Video</h3>
+                    <div class="video-result">
+                        <video id="resultVideo" controls></video>
+                        <div class="download-buttons">
+                            <button class="btn btn-secondary" id="downloadVideo">Download Video</button>
+                            <button class="btn btn-secondary" id="downloadThumbnail">Download Thumbnail</button>
+                        </div>
+                        <button class="btn btn-primary" id="newVideoBtn">Generate Another</button>
+                    </div>
+                </div>
+            </div>
+            <div class="history-section">
+                <div class="card">
+                    <div class="history-header">
+                        <h2>My Videos</h2>
+                        <button class="btn-refresh" id="refreshHistory">⟳</button>
+                    </div>
+                    <div id="historyList" class="history-list">
+                        <p class="empty-state">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
