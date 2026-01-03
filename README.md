@@ -1,6 +1,7 @@
 # AI Video Generator - Multi-User Flask App
 
 Secure web app for generating videos using OpenAI Sora API.
+Tested to work with Sora 2 API on Linux x64 & ARM (M2 Macbook Air) system.
 
 ## Installation
 
